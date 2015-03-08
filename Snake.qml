@@ -5,6 +5,7 @@ Rectangle
     anchors.fill:parent
     color: "black"
 
+
     Timer
     {
         id: gameTimer
@@ -108,6 +109,24 @@ Rectangle
                 game.newGame();
                 gameTimer.start();
             }
+        }
+    }
+    Item{
+        anchors.fill: parent
+        focus: true
+        enabled:true
+        Keys.onLeftPressed: {
+            game.changeDir(1);
+        }
+
+        Keys.onRightPressed: {
+            game.changeDir(3);
+        }
+        Keys.onUpPressed: {
+            game.changeDir(0);
+        }
+        Keys.onDownPressed: {
+            game.changeDir(2);
         }
     }
 }
