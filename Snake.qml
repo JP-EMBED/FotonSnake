@@ -9,7 +9,7 @@ Rectangle
     Timer
     {
         id: gameTimer
-        interval: 400
+        interval: 100
         running: false
         repeat: true
         onTriggered:

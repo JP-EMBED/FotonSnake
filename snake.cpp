@@ -37,21 +37,23 @@ Snake::~Snake()
 int Snake::checkValidMove()
 {
     Cordinate head;
+    const Cordinate* ptr;
     bool conflict = false;
     m_prevDir = m_dir;
 
-    qDebug() << "entered";
+   // qDebug() << "entered";
 
     head.m_x = m_head.m_x + (m_dir%2 ? m_dir-2: 0);
     head.m_y = m_head.m_y + (m_dir%2 ? 0: m_dir-1);
 
     //qDebug() << head.m_x;
     //qDebug() << head.m_y;
-    qDebug() << m_list.length();
+    //qDebug() << m_list.length();
 
-    for (int i = 0; i < m_list.length() && !conflict; ++i)
+    for (int i = 0; i < m_list.length(); ++i)
     {
-        if (m_list.at(i).m_x == head.m_x && m_list.at(i).m_y == head.m_y)
+        ptr = &(m_list.at(i));
+        if (ptr->m_x == head.m_x && ptr->m_y == head.m_y)
             conflict = true;
     }
 
@@ -72,9 +74,10 @@ int Snake::checkValidMove()
                 m_pellet.m_y = m_rand.GetRandomNumber(32);
 
                 goodPlacement = true;
-                for (int i = 0; i < m_list.length() && !goodPlacement; ++i)
+                for (int i = 0; i < m_list.length(); ++i)
                 {
-                    if ((m_list.at(i).m_x == m_pellet.m_x) && (m_list.at(i).m_y == m_pellet.m_y))
+                    ptr = &(m_list.at(i));
+                    if ((ptr->m_x == m_pellet.m_x) && (ptr->m_y == m_pellet.m_y))
                         goodPlacement = false;
                 }
             }
@@ -97,7 +100,7 @@ int Snake::checkValidMove()
     else
         conflict = true;
 
-    qDebug() << conflict;
+    //qDebug() << conflict;
 
     return conflict;
 }
