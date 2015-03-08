@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ConnectionMenu/FindDeviceMenu.qml</file>
+        <file>Snake.qml</file>
+    </qresource>
+</RCC>
