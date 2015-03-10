@@ -9,7 +9,7 @@ Rectangle
     Timer
     {
         id: gameTimer
-        interval: 100
+        interval: 150
         running: false
         repeat: true
         onTriggered:
@@ -18,6 +18,7 @@ Rectangle
             {
                 gameTimer.stop();
                 startGame.visible = true;
+                textAnimation.resume();
             }
         }
     }
@@ -28,6 +29,8 @@ Rectangle
         x: parent.width/3
         height: parent.height/3
         width: parent.width/3
+        radius: width
+        color: "red"
         MouseArea
         {
             anchors.fill:parent
@@ -45,6 +48,8 @@ Rectangle
         x: parent.width*2/3
         height: parent.height/3
         width: parent.width/3
+        radius: width
+        color: "red"
         MouseArea
         {
             anchors.fill:parent
@@ -62,6 +67,8 @@ Rectangle
         x: parent.width/3
         height: parent.height/3
         width: parent.width/3
+        radius: width
+        color: "red"
         MouseArea
         {
             anchors.fill:parent
@@ -78,6 +85,8 @@ Rectangle
         y: parent.height/3
         height: parent.height/3
         width: parent.width/3
+        radius: width
+        color: "red"
         MouseArea
         {
             anchors.fill:parent
@@ -91,12 +100,35 @@ Rectangle
     {
         id:startGame
         anchors.fill: parent
-        Text
+
+        Image
         {
             anchors.fill: parent
-            text: "Start"
-            font.pixelSize: parent.height/12
-            horizontalAlignment: Text.AlignHCenter
+            source: "images/snake.png"
+        }
+        Text
+        {
+            id: pressAny
+            text:"Press Any Key"
+            color: "blue"
+            font.pixelSize: startGame.height/20
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: parent.height - (height*1.3)
+            SequentialAnimation on color
+            {
+                id:textAnimation
+                running: true
+                loops: Animation.Infinite
+                ColorAnimation{
+                    to: "red"
+                    duration: 1000
+                }
+
+                ColorAnimation{
+                    to: "blue"
+                    duration: 1000
+                }
+            }
         }
         MouseArea
         {
@@ -108,6 +140,7 @@ Rectangle
                 startGame.visible = false;
                 game.newGame();
                 gameTimer.start();
+                textAnimation.pause();
             }
         }
     }
@@ -116,17 +149,49 @@ Rectangle
         focus: true
         enabled:true
         Keys.onLeftPressed: {
-            game.changeDir(1);
+            if(startGame.visible)
+            {
+                startGame.visible = false;
+                game.newGame();
+                gameTimer.start();
+                textAnimation.pause();
+            }
+            else
+                game.changeDir(1);
         }
 
         Keys.onRightPressed: {
-            game.changeDir(3);
+            if(startGame.visible)
+            {
+                startGame.visible = false;
+                game.newGame();
+                gameTimer.start();
+                textAnimation.pause();
+            }
+            else
+                game.changeDir(3);
         }
         Keys.onUpPressed: {
-            game.changeDir(0);
+            if(startGame.visible)
+            {
+                startGame.visible = false;
+                game.newGame();
+                gameTimer.start();
+                textAnimation.pause();
+            }
+            else
+                game.changeDir(0);
         }
         Keys.onDownPressed: {
-            game.changeDir(2);
+            if(startGame.visible)
+            {
+                startGame.visible = false;
+                game.newGame();
+                gameTimer.start();
+                textAnimation.pause();
+            }
+            else
+                game.changeDir(2);
         }
     }
 }

@@ -110,7 +110,7 @@ void Snake::changeDir(int dir)
     if (m_prevDir+dir != 4 && m_prevDir+dir != 2)
         m_dir = dir;
 
-    qDebug() << m_dir;
+    //qDebug() << m_dir;
 }
 
 void Snake::newGame()

@@ -33,7 +33,6 @@ Rectangle {
             busy.running = false;
             console.log("Connected to " + deviceID);
             topRect.visible = false;
-            boardView.visible = true;
         }
     }
 
